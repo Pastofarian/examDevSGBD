@@ -26,24 +26,70 @@ class AnimalController {
         return include '../views/animals/notfound.php';
     }
 
+    // public function store ($data) {
+    //     if ($data && $data["name"]) {
+    //         // CHeck si les clés existent dans les données, et si ce n'est pas le cas, donne des valeurs par défaut.
+    //         $sex = array_key_exists('sex', $data) && $data['sex'] ? $data['sex'] : 'M';
+    //         $sterilized = array_key_exists('sterilized', $data) && $data['sterilized'] ? $data['sterilized'] : '0';
+    //         $birth_date = array_key_exists('birth_date', $data) && $data['birth_date'] ? $data['birth_date'] : '2011-07-07';
+    //         $chip_id = array_key_exists('chip_id', $data) && $data['chip_id'] ? $data['chip_id'] : '0000000';
+    //         $owner_id = array_key_exists('owner_id', $data) && $data['owner_id'] ? $data['owner_id'] : '1';
+    
+    //         // Ensuite crée une nouvelle instance de Animal avec ces valeurs.
+    //         $animal = new Animal(false, $data["name"], $sex, $sterilized, $birth_date, $chip_id, $owner_id);
+    
+    //         $animal->save();
+    //         return include '../views/animals/store.php';
+    //     }
+    // }
+
     public function store ($data) {
+        var_dump($_POST);
         if ($data && $data["name"]) {
-            $animal = new Animal(false, $data["name"], $data["sex"], $data["sterilized"], $data["birth_date"], $data["chip_id"]);
+    
+            $sex = array_key_exists('sex', $data) && $data['sex'] ? $data['sex'] : 'M';
+            $sterilized = array_key_exists('sterilized', $data) && $data['sterilized'] ? $data['sterilized'] : '0';
+            
+            if (array_key_exists('birth_date', $data) && $data['birth_date']) {
+
+                $date = DateTime::createFromFormat('Y-m-d', $data['birth_date']);
+                if ($date === false) {
+                    $birth_date = '2011-07-07';
+                } else {
+                    $birth_date = $date->format('Y-m-d');
+                }
+            } else {
+                $birth_date = '2011-07-07';
+            }
+            var_dump($data);
+    
+            $chip_id = array_key_exists('chip_id', $data) && $data['chip_id'] ? $data['chip_id'] : '0000000';
+            $owner_id = array_key_exists('owner_id', $data) && $data['owner_id'] ? $data['owner_id'] : '1';
+    
+            $animal = new Animal(false, $data["name"], $sex, $sterilized, $birth_date, $chip_id, $owner_id);
+    
             $animal->save();
             return include '../views/animals/store.php';
         }
     }
+    
 
     public function update ($id, $data) {
+        var_dump($_POST);
         $animal = Animal::find($id);
         if ($animal) {
-            $animal->name = $data["name"] ? $data["name"] : $animal->name;
-            // Similar assignments for other attributes
+            $animal->name = isset($data["name"]) ? $data["name"] : $animal->name;
+            $animal->sex = isset($data["sex"]) ? $data["sex"] : $animal->sex;
+            $animal->sterilized = isset($data["sterilized"]) ? $data["sterilized"] : $animal->sterilized;
+            $animal->birth_date = isset($data["birth_date"]) ? $data["birth_date"] : $animal->birth_date;
+            $animal->chip_id = isset($data["chip_id"]) ? $data["chip_id"] : $animal->chip_id;
+    
             $animal->save();
             return include '../views/animals/update.php';
         }
         return include '../views/animals/notfound.php';
     }
+    
 
     public function destroy ($id) {
         $animal = Animal::find($id);

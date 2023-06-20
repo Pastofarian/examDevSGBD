@@ -1,17 +1,17 @@
 <?php
-
 // class Router {
 //     private $routes = [];
 
 //     public function __construct() {
-// //        Defini les routes
+//         // Defini les routes
 //         $this->addRoute('/', 'AnimalController', 'index');
-//         $this->addRoute('/show/{id}', 'AnimalController', 'show');
-//         $this->addRoute('/edit/{id}', 'AnimalController', 'edit');
-//         $this->addRoute('/create', 'AnimalController', 'create');
-//         $this->addRoute('/delete/{id}', 'AnimalController', 'destroy');
-//         $this->addRoute('/update/{id}', 'AnimalController', 'update');
-//         $this->addRoute('/store', 'AnimalController', 'store');
+//         $this->addRoute('/animals/{id}', 'AnimalController', 'show');
+//         $this->addRoute('/animals/{id}/edit', 'AnimalController', 'edit');
+//         $this->addRoute('/animals/create', 'AnimalController', 'create');
+//         $this->addRoute('/animals/{id}/destroy', 'AnimalController', 'destroy');
+//         $this->addRoute('/animals/{id}/update', 'AnimalController', 'update');
+//         $this->addRoute('/animals', 'AnimalController', 'store');
+        
 
 //         // Récupère l'URI et dispatch la requête
 //         $request_uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -118,8 +118,6 @@
 //         return true;
 //     }
 // }
-
-
 class Router {
     
     private $data;
@@ -169,12 +167,12 @@ class Router {
         }
         
         $this->detect_action();
+        
         if ($this->action == "index" && $this->id) {
             $this->action = "show";
         } else if ($this->action == "index" && !empty($_POST)) {
             $this->action = "store";
         }
-        
     }
     
     private function clean_url () {

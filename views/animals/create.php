@@ -1,8 +1,9 @@
-<form action="/" method="post" class="store">
-<input type="text" name="name" placeholder="Nom">
+<form action="/animals" method="post" class="store">
+    <input type="text" name="name" placeholder="Nom">
     <input type="text" name="sex" placeholder="Sexe">
     <input type="text" name="sterilized" placeholder="Sterilisé">
     <input type="date" name="birth_date" placeholder="Date de naissance">
     <input type="text" name="chip_id" placeholder="Numéro puce">
+    <input type="text" name="owner_id" placeholder="ID du propriétaire">
     <input type="submit" value="Enregistrer">
 </form>
