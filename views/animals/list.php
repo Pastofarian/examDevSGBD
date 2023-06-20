@@ -6,12 +6,12 @@ include('../views/layout/top.php'); ?>
 <table>
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Age</th>
-            <th>Show</th>
-            <th>Edit</th>
-            <th>Delete</th>
+            <th>Nom</th>
+            <th>Sexe</th>
+            <th>Date de naissance</th>
+            <th>Afficher</th>
+            <th>Modifier</th>
+            <th>Effacer</th>
         </tr>
     </thead>
     <tbody>
@@ -20,12 +20,12 @@ include('../views/layout/top.php'); ?>
             <td><?= $animal->name; ?></td>
             <td><?= $animal->sex; ?></td>
             <td><?= $animal->birth_date; ?></td>
-            <td><button class="xhr show" _id="<?= $animal->id; ?>">Show</button></td>
-            <td><button class="xhr edit" _id="<?= $animal->id; ?>">Edit</button></td>
-            <td><button class="xhr delete" _id="<?= $animal->id; ?>">Delete</button></td>
+            <td><button class="xhr show" _id="<?= $animal->id; ?>">Afficher</button></td>
+            <td><button class="xhr edit" _id="<?= $animal->id; ?>">Modifier</button></td>
+            <td><button class="xhr delete" _id="<?= $animal->id; ?>">Effacer</button></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-<button class="xhr create">New Animal</button>
+<button class="xhr create">Nouvel Animal</button>
 <?php include('../views/layout/bottom.php'); ?>

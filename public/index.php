@@ -12,4 +12,4 @@ ini_set('display_startup_errors', 1);
 // $router = new Router($_SERVER["REQUEST_URI"]);
 
 include('../autoload.php');
-$router = new Router();
+$router = new Router($_SERVER["REQUEST_URI"]);
