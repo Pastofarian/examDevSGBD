@@ -1,7 +1,5 @@
 <?php
 
-$currentPage = 'owners';
-
 class OwnerController {
     public function index () {
         $owners = Owner::all();

@@ -29,4 +29,5 @@ class OwnerDAO extends DAO {
             $data["phone"] ?? false
         );
     }
+    
 }

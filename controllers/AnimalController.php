@@ -3,6 +3,10 @@
 class AnimalController {
     public function index () {
         $animals = Animal::all();
+        $owners = []; 
+        foreach($animals as $animal) {
+            $owners[$animal->id] = Owner::find($animal->owner_id);  // stock chaque objet Owner dans le tableau, en utilisant l'ID de l'animal comme clé
+        }
         include '../views/animals/list.php';
     }
 
@@ -15,10 +19,12 @@ class AnimalController {
     }
 
     public function create () {
+        $owners = Owner::all();
         return include '../views/animals/create.php';
     }
 
     public function edit ($id) {
+        $owners = Owner::all();
         $animal = Animal::find($id);
         if ($animal) {
             return include '../views/animals/edit.php';

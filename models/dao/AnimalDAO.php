@@ -29,5 +29,5 @@ class AnimalDAO extends DAO {
             $data["chip_id"] ?? false,
             $data["owner_id"] ?? false
         );
-    }
+    }   
 }

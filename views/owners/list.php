@@ -9,6 +9,7 @@ include('../views/layout/top.php'); ?>
         <tr>
             <th>Prénom</th>
             <th>Nom</th>
+            <th>Animal</th>
             <th>Afficher</th>
             <th>Modifier</th>
             <th>Effacer</th>
@@ -19,6 +20,14 @@ include('../views/layout/top.php'); ?>
             <tr>
             <td><?= $owner->first_name; ?></td>
             <td><?= $owner->last_name; ?></td>
+            <td>
+            <?php 
+            $animals = $owner->animals();
+            foreach($animals as $animal) {
+                echo $animal->name . '<br>';
+            }
+            ?>
+            </td>
             <td><button class="xhr show" _id="<?= $owner->id; ?>">Afficher</button></td>
             <td><button class="xhr edit" _id="<?= $owner->id; ?>">Modifier</button></td>
             <td><button class="xhr delete" _id="<?= $owner->id; ?>">Effacer</button></td>
