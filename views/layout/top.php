@@ -7,7 +7,9 @@
     </head>
     <body>
     <nav>
-        <a href="/">Home</a>
+        <a href="/animals">Animaux</a>
+        <a href="/owners">Propriétaires</a>
+        <a href="/stays">Séjours</a>
     </nav>
     <div class="content">
         

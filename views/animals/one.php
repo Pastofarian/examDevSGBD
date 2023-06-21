@@ -4,4 +4,4 @@
 <h2><?= $animal->birth_date; ?></h2>
 <h2><?= $animal->chip_id; ?></h2>
 <h2><?= $animal->owner_id; ?></h2>
-<a href="/">Retour à la liste</a>   
+<a href="/animals">Retour à la liste</a>   

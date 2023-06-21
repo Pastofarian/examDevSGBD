@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    //les différents boutons qui font une requete XHR ont tous la classe "xhr" ainsi qu'une classe correspondant à l'action (edit/create/show/destroy);
+
     $('body').on('click', 'button.xhr', function () {
         let id = $(this).attr('_id');
         if ($(this).hasClass('edit')) {
@@ -12,7 +12,6 @@ $(document).ready(function () {
         return destroy(id);
     });
 
-    //on ecoute le submit de form pour l'intercepter et le traiter en JS
     $('body').on('submit', 'form', function (e) {
         e.preventDefault();
         if ($(this).hasClass('update')) {
@@ -22,7 +21,7 @@ $(document).ready(function () {
     });
 
     function show(id) {
-        $.get("/animals/" + id).done(function (result) {
+        $.get("/stays/" + id).done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
             console.warn('error in show', err);
@@ -30,7 +29,7 @@ $(document).ready(function () {
     }
 
     function edit(id) {
-        $.get("/animals/" + id + "/edit").done(function (result) {
+        $.get("/stays/" + id + "/edit").done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
             console.warn('error in edit', err);
@@ -38,7 +37,7 @@ $(document).ready(function () {
     }
 
     function create() {
-        $.get("/animals/create").done(function (result) {
+        $.get("/stays/create").done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
             console.warn('error in create', err);
@@ -46,7 +45,7 @@ $(document).ready(function () {
     }
 
     function destroy(id) {
-        $.post("/animals/" + id + "/destroy").done(function (result) {
+        $.post("/stays/" + id + "/destroy").done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
             console.warn('error in destroy', err);
@@ -54,20 +53,18 @@ $(document).ready(function () {
     }
 
     function update($form) {
-        let name = $form.find('input[name="name"]').val();
-        let sex = $form.find('input[name="sex"]').val();
-        let sterilized = $form.find('input[name="sterilized"]').val();
-        let birth_date = $form.find('input[name="birth_date"]').val();
-        let chip_id = $form.find('input[name="chip_id"]').val();
+        let reservation_date = $form.find('input[name="reservation_date"]').val();
+        let start_date = $form.find('input[name="start_date"]').val();
+        let end_date = $form.find('input[name="end_date"]').val();
+        let animal_id = $form.find('input[name="animal_id"]').val();
         let id = $form.find('input[name="id"]').val();
 
-        $.post('/animals/' + id + '/update', {
+        $.post('/stays/' + id + '/update', {
             id: id,
-            name: name,
-            sex: sex,
-            sterilized: sterilized,
-            birth_date: birth_date,
-            chip_id: chip_id
+            reservation_date: reservation_date,
+            start_date: start_date,
+            end_date: end_date,
+            animal_id: animal_id
         }).done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
@@ -75,27 +72,21 @@ $(document).ready(function () {
         });
     }
 
-
     function store($form) {
-        let name = $form.find('input[name="name"]').val();
-        let sex = $form.find('input[name="sex"]').val();
-        let sterilized = $form.find('input[name="sterilized"]').val();
-        let birth_date = $form.find('input[name="birth_date"]').val();
-        let chip_id = $form.find('input[name="chip_id"]').val();
-        let id = $form.find('input[name="id"]').val();
+        let reservation_date = $form.find('input[name="reservation_date"]').val();
+        let start_date = $form.find('input[name="start_date"]').val();
+        let end_date = $form.find('input[name="end_date"]').val();
+        let animal_id = $form.find('input[name="animal_id"]').val();
 
-        $.post('/animals', {
-            id: id,
-            name: name,
-            sex: sex,
-            sterilized: sterilized,
-            birth_date: birth_date,
-            chip_id: chip_id
+        $.post('/stays', {
+            reservation_date: reservation_date,
+            start_date: start_date,
+            end_date: end_date,
+            animal_id: animal_id
         }).done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
             console.warn('error in store', err);
         });
     }
-
 });

@@ -3,4 +3,4 @@
 <h2><?= $owner->birth_date; ?></h2>
 <h2><?= $owner->email; ?></h2>
 <h2><?= $owner->phone; ?></h2>
-<a href="/">Retour à la liste</a>   
+<a href="/owners">Retour à la liste</a>   

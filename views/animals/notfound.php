@@ -1,2 +1,2 @@
 <h1>Animal non trouvé</h1>
-<a href="/">Retour à la liste</a>
+<a href="/animals">Retour à la liste</a>
