@@ -3,6 +3,7 @@
    ini_set('display_errors', 1);
    ini_set('display_startup_errors', 1);
 include('../views/layout/top.php'); ?>
+<?php $currentPage = 'animals'; ?>
 <table>
     <thead>
         <tr>
@@ -29,3 +30,4 @@ include('../views/layout/top.php'); ?>
 </table>
 <button class="xhr create">Nouvel Animal</button>
 <?php include('../views/layout/bottom.php'); ?>
+

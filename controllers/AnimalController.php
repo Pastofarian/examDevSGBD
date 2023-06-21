@@ -26,25 +26,8 @@ class AnimalController {
         return include '../views/animals/notfound.php';
     }
 
-    // public function store ($data) {
-    //     if ($data && $data["name"]) {
-    //         // CHeck si les clés existent dans les données, et si ce n'est pas le cas, donne des valeurs par défaut.
-    //         $sex = array_key_exists('sex', $data) && $data['sex'] ? $data['sex'] : 'M';
-    //         $sterilized = array_key_exists('sterilized', $data) && $data['sterilized'] ? $data['sterilized'] : '0';
-    //         $birth_date = array_key_exists('birth_date', $data) && $data['birth_date'] ? $data['birth_date'] : '2011-07-07';
-    //         $chip_id = array_key_exists('chip_id', $data) && $data['chip_id'] ? $data['chip_id'] : '0000000';
-    //         $owner_id = array_key_exists('owner_id', $data) && $data['owner_id'] ? $data['owner_id'] : '1';
-    
-    //         // Ensuite crée une nouvelle instance de Animal avec ces valeurs.
-    //         $animal = new Animal(false, $data["name"], $sex, $sterilized, $birth_date, $chip_id, $owner_id);
-    
-    //         $animal->save();
-    //         return include '../views/animals/store.php';
-    //     }
-    // }
-
     public function store ($data) {
-        var_dump($_POST);
+        //var_dump($_POST);
         if ($data && $data["name"]) {
     
             $sex = array_key_exists('sex', $data) && $data['sex'] ? $data['sex'] : 'M';
@@ -61,7 +44,7 @@ class AnimalController {
             } else {
                 $birth_date = '2011-07-07';
             }
-            var_dump($data);
+            //var_dump($data);
     
             $chip_id = array_key_exists('chip_id', $data) && $data['chip_id'] ? $data['chip_id'] : '0000000';
             $owner_id = array_key_exists('owner_id', $data) && $data['owner_id'] ? $data['owner_id'] : '1';
@@ -75,7 +58,7 @@ class AnimalController {
     
 
     public function update ($id, $data) {
-        var_dump($_POST);
+        //var_dump($_POST);
         $animal = Animal::find($id);
         if ($animal) {
             $animal->name = isset($data["name"]) ? $data["name"] : $animal->name;
