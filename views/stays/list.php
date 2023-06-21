@@ -7,6 +7,7 @@ include('../views/layout/top.php'); ?>
 <table>
     <thead>
         <tr>
+            <th>ID de l'animal</th>
             <th>Date de réservation</th>
             <th>Date de début</th>
             <th>Date de fin</th>
@@ -18,6 +19,7 @@ include('../views/layout/top.php'); ?>
     <tbody>
         <?php foreach($stays as $stay): ?>
             <tr>
+            <td><?= $stay->animal_id; ?></td>
             <td><?= $stay->reservation_date; ?></td>
             <td><?= $stay->start_date; ?></td>
             <td><?= $stay->end_date; ?></td>

@@ -104,15 +104,29 @@ class Router {
         return $this->action = "index";
     }
     
+    // private function run () {
+    //     $this->controller = new $this->controller();
+    //     if ($this->id && !$this->data) {
+    //         return $this->controller->{$this->action}($this->id);
+    //     } else if (!$this->id && $this->data) {
+    //         $this->controller->{$this->action}($this->data);
+    //     }
+    //     return $this->controller->{$this->action}($this->id, $this->data);
+    // }
+
     private function run () {
         $this->controller = new $this->controller();
         if ($this->id && !$this->data) {
-            return $this->controller->{$this->action}($this->id);
+            $this->controller->{$this->action}($this->id);
         } else if (!$this->id && $this->data) {
             $this->controller->{$this->action}($this->data);
+        } else if ($this->id && $this->data) {
+            $this->controller->{$this->action}($this->id, $this->data);
+        } else {
+            $this->controller->{$this->action}();
         }
-        return $this->controller->{$this->action}($this->id, $this->data);
     }
+    
     
     private function debug () {
         var_dump($this->controller, $this->id, $this->action);
