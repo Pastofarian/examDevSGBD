@@ -24,20 +24,21 @@
             </table>
         </div>
         <div class="animal-list">
-            <h2>Animal / Animaux</h2>
-            <?php 
-                $animals = $owner->animals();
-                if (count($animals) > 0): 
-            ?>
-                <ul>
-                    <?php foreach($animals as $animal): ?>
-                        <li><?= htmlspecialchars($animal->name); ?></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php else: ?>
-                <p>Il n'y a pas d'animal</p>
-            <?php endif; ?>
-        </div>
+    <h2>Animal / Animaux</h2>
+    <?php 
+        $animals = $owner->animals();
+        if (is_array($animals) || is_object($animals)): 
+    ?>
+        <ul>
+            <?php foreach($animals as $animal): ?>
+                <li><?= htmlspecialchars($animal->name); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>Il n'y a pas d'animal</p>
+    <?php endif; ?>
+</div>
+
         <div class="back-link">
             <a href="/owners">Retour à la liste</a>
         </div>

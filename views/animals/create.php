@@ -8,8 +8,8 @@
     <div>
         <label for="sex">Sexe:</label>
         <select id="sex" name="sex">
-            <option value="Male">Mâle</option>
-            <option value="Female">Femelle</option>
+            <option value="M">Mâle</option>
+            <option value="F">Femelle</option>
         </select>
     </div>
     <div>
@@ -28,13 +28,14 @@
         <input type="text" id="chip_id" name="chip_id" placeholder="Numéro de puce">
     </div>
     <div>
-        <label for="owner_id">Propriétaire:</label>
-        <select id="owner_id" name="owner_id">
-            <?php foreach ($owners as $owner) : ?>
-                <option value="<?= $owner->id; ?>"><?= $owner->first_name . ' ' . $owner->last_name; ?></option>
-            <?php endforeach; ?>
-        </select>
-    </div>
+    <label for="owner_id">Propriétaire:</label>
+    <select id="owner_id" name="owner_id">
+        <?php foreach ($owners as $owner) : ?>
+            <option value="<?= $owner->id; ?>"><?= $owner->first_name . ' ' . $owner->last_name; ?></option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
     <div>
         <input type="submit" value="Enregistrer">
     </div>

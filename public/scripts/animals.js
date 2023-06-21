@@ -56,10 +56,11 @@ $(document).ready(function () {
 
     function update($form) {
         let name = $form.find('input[name="name"]').val();
-        let sex = $form.find('input[name="sex"]').val();
-        let sterilized = $form.find('input[name="sterilized"]').val();
+        let sex = $form.find('select[name="sex"]').val();
+        let sterilized = $form.find('select[name="sterilized"]').val();
         let birth_date = $form.find('input[name="birth_date"]').val();
         let chip_id = $form.find('input[name="chip_id"]').val();
+        let owner_id = $form.find('select[name="owner_id"]').val();
         let id = $form.find('input[name="id"]').val();
 
         $.post('/animals/' + id + '/update', {
@@ -68,7 +69,8 @@ $(document).ready(function () {
             sex: sex,
             sterilized: sterilized,
             birth_date: birth_date,
-            chip_id: chip_id
+            chip_id: chip_id,
+            owner_id: owner_id
         }).done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
@@ -78,24 +80,25 @@ $(document).ready(function () {
 
     function store($form) {
         let name = $form.find('input[name="name"]').val();
-        let sex = $form.find('input[name="sex"]').val();
-        let sterilized = $form.find('input[name="sterilized"]').val();
+        let sex = $form.find('select[name="sex"]').val();
+        let sterilized = $form.find('select[name="sterilized"]').val();
         let birth_date = $form.find('input[name="birth_date"]').val();
         let chip_id = $form.find('input[name="chip_id"]').val();
-        let id = $form.find('input[name="id"]').val();
+        let owner_id = $form.find('select[name="owner_id"]').val();
 
         $.post('/animals', {
-            id: id,
             name: name,
             sex: sex,
             sterilized: sterilized,
             birth_date: birth_date,
-            chip_id: chip_id
+            chip_id: chip_id,
+            owner_id: owner_id
         }).done(function (result) {
             $('.content').html(result);
         }).fail(function (err) {
             console.warn('error in store', err);
         });
     }
+
 
 });

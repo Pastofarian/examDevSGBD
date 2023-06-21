@@ -9,8 +9,8 @@
     <div>
         <label for="sex">Sexe:</label>
         <select id="sex" name="sex">
-            <option value="Male" <?= $animal->sex == 'Male' ? 'selected' : '' ?>>Mâle</option>
-            <option value="Female" <?= $animal->sex == 'Female' ? 'selected' : '' ?>>Femelle</option>
+            <option value="M" <?= $animal->sex == 'M' ? 'selected' : '' ?>>Mâle</option>
+            <option value="F" <?= $animal->sex == 'F' ? 'selected' : '' ?>>Femelle</option>
         </select>
     </div>
     <div>

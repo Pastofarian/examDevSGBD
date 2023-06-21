@@ -1,7 +1,7 @@
 <?php 
-   error_reporting(E_ALL);
-   ini_set('display_errors', 1);
-   ini_set('display_startup_errors', 1);
+//    error_reporting(E_ALL);
+//    ini_set('display_errors', 1);
+//    ini_set('display_startup_errors', 1);
 include('../views/layout/top.php'); ?>
 <?php $currentPage = 'owners'; ?>
 <table>
@@ -23,8 +23,12 @@ include('../views/layout/top.php'); ?>
             <td>
             <?php 
             $animals = $owner->animals();
-            foreach($animals as $animal) {
-                echo $animal->name . '<br>';
+            if (is_array($animals) || is_object($animals)) {
+                foreach($animals as $animal) {
+                    echo $animal->name . '<br>';
+                }
+            } else {
+                echo 'Pas d\'animal';
             }
             ?>
             </td>

@@ -34,7 +34,13 @@ class AnimalController {
     }
 
     public function store ($data) {
-        //var_dump($_POST);
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+        $errorMessage = $this->validateAnimalData($data);
+        if ($errorMessage) {
+            return include '../views/animals/dateError.php';
+        }
         if ($data && $data["name"]) {
     
             $sex = array_key_exists('sex', $data) && $data['sex'] ? $data['sex'] : 'M';
@@ -56,7 +62,15 @@ class AnimalController {
             $chip_id = array_key_exists('chip_id', $data) && $data['chip_id'] ? $data['chip_id'] : '0000000';
             $owner_id = array_key_exists('owner_id', $data) && $data['owner_id'] ? $data['owner_id'] : '1';
     
-            $animal = new Animal(false, $data["name"], $sex, $sterilized, $birth_date, $chip_id, $owner_id);
+            $animal = new Animal(
+                false, 
+                $data["name"], 
+                $sex, 
+                $sterilized, 
+                $birth_date, 
+                $chip_id, 
+                $owner_id
+            );
     
             $animal->save();
             return include '../views/animals/store.php';
@@ -66,6 +80,10 @@ class AnimalController {
 
     public function update ($id, $data) {
         //var_dump($_POST);
+        $errorMessage = $this->validateAnimalData($data);
+        if ($errorMessage) {
+            return include '../views/animals/dateError.php';
+        }
         $animal = Animal::find($id);
         if ($animal) {
             $animal->name = isset($data["name"]) ? $data["name"] : $animal->name;
@@ -73,7 +91,7 @@ class AnimalController {
             $animal->sterilized = isset($data["sterilized"]) ? $data["sterilized"] : $animal->sterilized;
             $animal->birth_date = isset($data["birth_date"]) ? $data["birth_date"] : $animal->birth_date;
             $animal->chip_id = isset($data["chip_id"]) ? $data["chip_id"] : $animal->chip_id;
-    
+            $animal->owner_id = isset($data["owner_id"]) ? $data["owner_id"] : $animal->owner_id;
             $animal->save();
             return include '../views/animals/update.php';
         }
@@ -88,5 +106,22 @@ class AnimalController {
             return include '../views/animals/delete.php';
         }
         return include '../views/animals/notfound.php';
+    }
+
+    private function validateAnimalData($data) {
+        $today = new DateTime();
+        $thirtyYearsAgo = new DateTime('-30 years');
+        
+        if(!isset($data['birth_date'])){
+            return 'Données manquantes. Veuillez vous assurer que la date de naissance est fournie.';
+        }
+    
+        $birthDate = DateTime::createFromFormat('Y-m-d', $data['birth_date']);
+
+        if ($birthDate > $today || $birthDate < $thirtyYearsAgo) {
+            return 'La date de naissance doit être comprise entre aujourd\'hui et 30 ans.';
+        }
+
+        return "";
     }
 }
