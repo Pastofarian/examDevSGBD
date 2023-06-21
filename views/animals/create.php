@@ -3,7 +3,7 @@
 <form action="/animals" method="post" class="store">
     <div>
         <label for="name">Nom:</label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" placeholder="Nom">
     </div>
     <div>
         <label for="sex">Sexe:</label>
@@ -25,7 +25,7 @@
     </div>
     <div>
         <label for="chip_id">Numéro de puce:</label>
-        <input type="text" id="chip_id" name="chip_id">
+        <input type="text" id="chip_id" name="chip_id" placeholder="Numéro de puce">
     </div>
     <div>
         <label for="owner_id">Propriétaire:</label>

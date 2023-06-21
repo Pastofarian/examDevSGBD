@@ -19,5 +19,10 @@ class Animal extends Entity {
         $this->chip_id = $chip_id;
         $this->owner_id = $owner_id;
     }
- 
+
+public static function findAllByOwnerId($ownerId) {
+    $animalDao = new AnimalDAO();
+    return $animalDao->fetchAllByOwnerId($ownerId);
+}
+
 }

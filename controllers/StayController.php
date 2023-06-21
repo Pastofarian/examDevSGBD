@@ -3,23 +3,31 @@
 class StayController {
     public function index() {
         $stays = Stay::all();
+        $animals = Animal::all();
+        $animalsById = [];
+        foreach ($animals as $animal) {
+        $animalsById[$animal->id] = $animal;
+    }
         include '../views/stays/list.php';
     }
 
     public function show($id) {
         $stay = Stay::find($id);
         if ($stay) {
+            $animal = Animal::find($stay->animal_id);
             return include '../views/stays/one.php';
         }
         return include '../views/stays/notfound.php';
     }
 
     public function create() {
+        $animals = Animal::all();
         return include '../views/stays/create.php';
     }
 
     public function edit($id) {
         $stay = Stay::find($id);
+        $animals = Animal::all();
         if ($stay) {
             return include '../views/stays/edit.php';
         }

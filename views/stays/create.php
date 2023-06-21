@@ -1,7 +1,31 @@
+<h2>Ajouter un nouveau séjour</h2>
+
 <form action="/stays" method="post" class="store">
-    <input type="date" name="reservation_date" placeholder="Date de réservation">
-    <input type="date" name="start_date" placeholder="Date de début">
-    <input type="date" name="end_date" placeholder="Date de fin">
-    <input type="text" name="animal_id" placeholder="ID de l'animal">
-    <input type="submit" value="Enregistrer">
+    <div>
+        <label for="reservation_date">Date de réservation:</label>
+        <input type="date" id="reservation_date" name="reservation_date" placeholder="Date de réservation">
+    </div>
+    <div>
+        <label for="start_date">Date de début:</label>
+        <input type="date" id="start_date" name="start_date" placeholder="Date de début">
+    </div>
+    <div>
+        <label for="end_date">Date de fin:</label>
+        <input type="date" id="end_date" name="end_date" placeholder="Date de fin">
+    </div>
+    <div>
+    <label for="animal_id">Animal:</label>
+    <select id="animal_id" name="animal_id">
+        <?php foreach ($animals as $animal) : ?>
+            <option value="<?= $animal->id; ?>">
+                <?= $animal->id . ' - ' . $animal->name; ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+
+    <div>
+        <input type="submit" value="Enregistrer">
+    </div>
 </form>
+

@@ -13,6 +13,7 @@ class AnimalController {
     public function show ($id) {
         $animal = Animal::find($id);
         if ($animal) {
+            $owner = Owner::find($animal->owner_id);
             return include '../views/animals/one.php'; 
         }
         return include '../views/animals/notfound.php';

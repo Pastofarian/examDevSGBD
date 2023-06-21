@@ -1,13 +1,14 @@
 <?php 
-   error_reporting(E_ALL);
-   ini_set('display_errors', 1);
-   ini_set('display_startup_errors', 1);
+//    error_reporting(E_ALL);
+//    ini_set('display_errors', 1);
+//    ini_set('display_startup_errors', 1);
 include('../views/layout/top.php'); ?>
 <?php $currentPage = 'stays'; ?>
 <table>
     <thead>
         <tr>
             <th>ID de l'animal</th>
+            <th>Nom de l'animal</th>
             <th>Date de réservation</th>
             <th>Date de début</th>
             <th>Date de fin</th>
@@ -18,8 +19,10 @@ include('../views/layout/top.php'); ?>
     </thead>
     <tbody>
         <?php foreach($stays as $stay): ?>
+            <?php $animal = $animals[$stay->animal_id]; ?>
             <tr>
             <td><?= $stay->animal_id; ?></td>
+            <td><?= $animalsById[$stay->animal_id]->name; ?></td>
             <td><?= $stay->reservation_date; ?></td>
             <td><?= $stay->start_date; ?></td>
             <td><?= $stay->end_date; ?></td>
