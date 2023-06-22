@@ -1,6 +1,7 @@
-<div class="stay-details">
+<div class="container mt-4">
+<div class="animal-details mb-4">
     <h2>Détails du séjour</h2>
-    <table>
+    <table class="table">
         <tr>
             <td><label>Date de réservation :</label></td>
             <td><?= htmlspecialchars($stay->reservation_date); ?></td>
@@ -26,5 +27,6 @@
     </table>
 </div>
 <div class="back-link">
-    <a href="/stays">Retour à la liste</a>
+    <a href="/stays" class="btn btn-primary">Retour à la liste</a>
+</div>
 </div>

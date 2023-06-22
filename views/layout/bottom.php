@@ -1,5 +1,5 @@
 </div>
-<!-- <script src="/scripts/ajax.js"></script> -->
+</div>
 <?php
 if ($currentPage === 'animals') {
     echo '<script src="/scripts/animals.js"></script>';

@@ -1,10 +1,7 @@
-<?php 
-//    error_reporting(E_ALL);
-//    ini_set('display_errors', 1);
-//    ini_set('display_startup_errors', 1);
+<?php $currentPage = 'owners';
 include('../views/layout/top.php'); ?>
-<?php $currentPage = 'owners'; ?>
-<table>
+<div class="container mt-5">
+    <table class="table table-striped table-hover">
     <thead>
         <tr>
             <th>Prénom</th>
@@ -32,16 +29,17 @@ include('../views/layout/top.php'); ?>
             }
             ?>
             </td>
-            <td><button class="xhr show" _id="<?= $owner->id; ?>">Afficher</button></td>
-            <td><button class="xhr edit" _id="<?= $owner->id; ?>">Modifier</button></td>
+            <td><button class="btn btn-primary xhr show" _id="<?= $owner->id; ?>">Afficher</button></td>
+            <td><button class="btn btn-warning xhr edit" _id="<?= $owner->id; ?>">Modifier</button></td>
             <?php if(!empty($ownerAnimals)): ?>
-    <td><button class="xhr delete" _id="<?= $owner->id; ?>" disabled>Effacer</button></td>
+    <td><button class="btn btn-danger xhr delete" _id="<?= $owner->id; ?>" disabled title="Propriétaire avec un animal, effacement impossible">Effacer</button></td>
 <?php else: ?>
-    <td><button class="xhr delete" _id="<?= $owner->id; ?>">Effacer</button></td>
+    <td><button class="btn btn-danger xhr delete" _id="<?= $owner->id; ?>">Effacer</button></td>
 <?php endif; ?>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-<button class="xhr create">Nouveau propriétaire</button>
+<button class="btn btn-success xhr create">Nouveau propriétaire</button>
+</div>
 <?php include('../views/layout/bottom.php'); ?>

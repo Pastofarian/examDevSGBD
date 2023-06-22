@@ -30,9 +30,5 @@ class AnimalDAO extends DAO {
             $data["owner_id"] ?? false
         );
     }
-
-    public function fetchAllByOwnerId($ownerId) {
-        return $this->where('owner_id', $ownerId);
-    }
     
 }

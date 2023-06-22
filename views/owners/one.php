@@ -1,6 +1,7 @@
-<div class="owner-details">
+<div class="container mt-4">
+<div class="animal-details mb-4">
     <h2>Détails du propriétaire</h2>
-    <table>
+    <table class="table">
         <tr>
             <td><label>Prénom:</label></td>
             <td><?= htmlspecialchars($owner->first_name); ?></td>
@@ -23,7 +24,7 @@
         </tr>
     </table>
 </div>
-<div class="animal-list">
+<div class="mb-4">
     <h2>Animal / Animaux</h2>
     <?php 
         $ownerAnimals = isset($animals) && is_array($animals) ? $animals : array(); 
@@ -40,5 +41,5 @@
 </div>
 
 <div class="back-link">
-    <a href="/owners">Retour à la liste</a>
+    <a href="/owners" class="btn btn-primary">Retour à la liste</a>
 </div>
