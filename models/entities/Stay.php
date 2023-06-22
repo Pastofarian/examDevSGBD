@@ -15,8 +15,4 @@ class Stay extends Entity {
         $this->end_date = $end_date;
         $this->animal_id = $animal_id;
     }
-
-    public function animal() {
-        return $this->belongsTo('Animal', 'animal_id');
-    }
 }

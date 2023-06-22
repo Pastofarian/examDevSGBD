@@ -3,20 +3,25 @@
 class OwnerController {
     public function index () {
         $owners = Owner::all();
+        $animals = array();
+        foreach ($owners as $owner) {
+            $animalList = Animal::where('owner_id', $owner->id); 
+            if ($animalList !== false) {  
+                $animals[$owner->id] = $animalList;
+            }
+        }
         include '../views/owners/list.php';
     }
-
-    public function show ($id) {
+    
+    public function show($id) {
         $owner = Owner::find($id);
-        if ($owner) {
-            return include '../views/owners/one.php'; 
+        if ($owner === false) {
+            include '../views/owners/notfound.php';
+        } else {
+            $animals = Animal::where('owner_id', $owner->id);
+            include '../views/owners/one.php';
         }
-        return include '../views/owners/notfound.php';
-    }
-
-    public function create () {
-        return include '../views/owners/create.php';
-    }
+    }    
 
     public function edit ($id) {
         $owner = Owner::find($id);

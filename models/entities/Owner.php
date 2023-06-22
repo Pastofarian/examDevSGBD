@@ -18,8 +18,4 @@ class Owner extends Entity {
         $this->phone = $phone;
     }
 
-    public function animals() {
-        // Pour avoir le nom du/des animaux dans les vues
-        return Animal::findAllByOwnerId($this->id);
-    }
 }

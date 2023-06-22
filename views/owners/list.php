@@ -22,9 +22,9 @@ include('../views/layout/top.php'); ?>
             <td><?= $owner->last_name; ?></td>
             <td>
             <?php 
-            $animals = $owner->animals();
-            if (is_array($animals) || is_object($animals)) {
-                foreach($animals as $animal) {
+            $ownerAnimals = array_key_exists($owner->id, $animals) ? $animals[$owner->id] : array();
+            if (!empty($ownerAnimals)) {
+                foreach($ownerAnimals as $animal) {
                     echo $animal->name . '<br>';
                 }
             } else {
