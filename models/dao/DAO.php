@@ -1,19 +1,23 @@
 <?php
 
-abstract class DAO {
+abstract class DAO
+{
     protected $table;
-    
-    public function __construct ($table) {
+
+    public function __construct($table)
+    {
         $this->table = $table;
         $this->connect();
     }
-    
-    public function connect () {
+
+    public function connect()
+    {
         $this->db = new PDO('mysql:host=localhost;dbname=devSGBD', 'root', 'toto');
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
-    
-    public function fetch ($id) {
+
+    public function fetch($id)
+    {
         $statement = $this->db->prepare("SELECT * FROM {$this->table} WHERE id = ?");
         try {
             $statement->execute([$id]);
@@ -22,51 +26,53 @@ abstract class DAO {
                 return $this->create($result);
             }
             return false;
-            
         } catch (PDOException $exception) {
             var_dump($exception);
         }
     }
-    
-    public function fetch_all () {
+
+    public function fetch_all()
+    {
         $statement = $this->db->prepare("SELECT * FROM {$this->table}");
         try {
             $statement->execute();
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             if ($results) {
-                $list = array();
-                foreach($results as $result) {
+                $list = [];
+                foreach ($results as $result) {
                     array_push($list, $this->create($result));
                 }
                 return $list;
             }
-            return false; 
+            return false;
         } catch (PDOException $exception) {
             var_dump($exception);
         }
     }
-    
-    public function where ($attr, $value) {
+
+    public function where($attr, $value)
+    {
         $statement = $this->db->prepare("SELECT * FROM {$this->table} WHERE {$attr} = ?");
         try {
             $statement->execute([$value]);
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             if ($results) {
-                $list = array();
-                foreach($results as $result) {
+                $list = [];
+                foreach ($results as $result) {
                     array_push($list, $this->create($result));
                 }
                 return $list;
             }
-            return false; 
+            return false;
         } catch (PDOException $exception) {
             var_dump($exception);
         }
     }
-    
-    public function first ($attr, $value) {
+
+    public function first($attr, $value)
+    {
         $statement = $this->db->prepare("SELECT * FROM {$this->table} WHERE {$attr} = ?");
         try {
             $statement->execute([$value]);
@@ -74,13 +80,14 @@ abstract class DAO {
             if ($result) {
                 return $this->create($result);
             }
-            return false; 
+            return false;
         } catch (PDOException $exception) {
             var_dump($exception);
         }
     }
-    
-    public function destroy ($id) {
+
+    public function destroy($id)
+    {
         $statement = $this->db->prepare("DELETE FROM {$this->table} WHERE id = ?");
         try {
             $statement->execute([$id]);
@@ -91,8 +98,9 @@ abstract class DAO {
             return false;
         }
     }
-    
-    public function insert ($statement, $data, $obj = false) { 
+
+    public function insert($statement, $data, $obj = false)
+    {
         try {
             $statement->execute($data);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
@@ -105,50 +113,52 @@ abstract class DAO {
             return false;
         }
     }
-    
-    public function intermediate ($table, $key, $value, $foreign) {
+
+    public function intermediate($table, $key, $value, $foreign)
+    {
         $statement = $this->db->prepare("SELECT {$foreign} FROM {$table} WHERE {$key} = ?");
         try {
             $statement->execute([$value]);
             $results = $statement->fetchAll(PDO::FETCH_ASSOC);
 
             if ($results) {
-                $list = array();
-                foreach($results as $result) {
+                $list = [];
+                foreach ($results as $result) {
                     array_push($list, $this->fetch($result[$foreign]));
                 }
                 return $list;
             }
-            return false; 
+            return false;
         } catch (PDOException $exception) {
             var_dump($exception);
         }
     }
-    
-    public function sync ($table, $key, $foreign_key,$obj, $foreign) {
-        if(is_array($foreign)) {
-            foreach($foreign as $f) {
-                $this->sync_one($table, $key, $foreign_key,$obj, $f);
+
+    public function sync($table, $key, $foreign_key, $obj, $foreign)
+    {
+        if (is_array($foreign)) {
+            foreach ($foreign as $f) {
+                $this->sync_one($table, $key, $foreign_key, $obj, $f);
             }
         } else {
-            return $this->sync_one($table, $key, $foreign_key,$obj, $foreign);
+            return $this->sync_one($table, $key, $foreign_key, $obj, $foreign);
         }
-        return true; 
-        
+        return true;
     }
-    
-    public function sync_one ($table, $key, $foreign_key,$obj, $foreign) {
+
+    public function sync_one($table, $key, $foreign_key, $obj, $foreign)
+    {
         $statement = $this->db->prepare("INSERT INTO {$table} ({$key}, {$foreign_key}) VALUES (?, ?)");
         return $this->insert($statement, [$obj->id, $foreign->id]);
     }
-    
-    public function unsync ($table, $key, $foreign_key,$obj, $foreign = false) {
+
+    public function unsync($table, $key, $foreign_key, $obj, $foreign = false)
+    {
         if ($foreign) {
             $statement = $this->db->prepare("DELETE FROM {$table} WHERE {$key} = ? AND {$foreign_key} = ?");
             return $this->insert($statement, [$obj->id, $foreign->id]);
         }
         $statement = $this->db->prepare("DELETE FROM {$table} WHERE {$key} = ?");
         return $this->insert($statement, [$obj->id]);
-        
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
-class Owner extends Entity {
+class Owner extends Entity
+{
     protected $id;
     protected $first_name;
     protected $last_name;
@@ -8,8 +9,9 @@ class Owner extends Entity {
     protected $email;
     protected $phone;
     protected static $dao = "OwnerDAO";
-    
-    public function __construct ($id, $first_name, $last_name, $birth_date, $email, $phone) {
+
+    public function __construct($id, $first_name, $last_name, $birth_date, $email, $phone)
+    {
         $this->id = $id;
         $this->first_name = $first_name;
         $this->last_name = $last_name;
@@ -17,5 +19,4 @@ class Owner extends Entity {
         $this->email = $email;
         $this->phone = $phone;
     }
-
 }
