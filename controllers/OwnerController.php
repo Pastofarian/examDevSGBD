@@ -23,6 +23,11 @@ class OwnerController {
         }
     }    
 
+    public function create () {
+        $owners = Owner::all();
+        return include '../views/owners/create.php';
+    }
+
     public function edit ($id) {
         $owner = Owner::find($id);
         if ($owner) {
@@ -33,6 +38,8 @@ class OwnerController {
 
     public function store ($data) {
         //var_dump($_POST);
+
+        $data = $this->sanitizeInput($data);
         $errorMessage = $this->validateOwnerData($data);
         if ($errorMessage) {
             return include '../views/owners/dateError.php';
@@ -53,6 +60,8 @@ class OwnerController {
     }
     
     public function update ($id, $data) {
+
+        $data = $this->sanitizeInput($data);
         $errorMessage = $this->validateOwnerData($data);
         if ($errorMessage) {
             return include '../views/owners/dateError.php';
@@ -97,4 +106,13 @@ class OwnerController {
 
         return "";
     }
+
+    private function sanitizeInput($data) {
+        $sanitizedData = [];
+        foreach ($data as $key => $value) {
+            $sanitizedData[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        }
+        return $sanitizedData;
+    }
+    
 }

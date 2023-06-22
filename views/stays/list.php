@@ -7,7 +7,7 @@ include('../views/layout/top.php'); ?>
 <table>
     <thead>
         <tr>
-            <th>ID de l'animal</th>
+            <th>N°puce de l'animal</th>
             <th>Nom de l'animal</th>
             <th>Date de réservation</th>
             <th>Date de début</th>
@@ -21,7 +21,7 @@ include('../views/layout/top.php'); ?>
         <?php foreach($stays as $stay): ?>
             <?php $animal = $animals[$stay->animal_id]; ?>
             <tr>
-            <td><?= $stay->animal_id; ?></td>
+            <td><?= $animalsById[$stay->animal_id]->chip_id; ?></td>
             <td><?= $animalsById[$stay->animal_id]->name; ?></td>
             <td><?= $stay->reservation_date; ?></td>
             <td><?= $stay->start_date; ?></td>

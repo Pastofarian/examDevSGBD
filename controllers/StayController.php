@@ -37,6 +37,7 @@ class StayController {
     public function store($data) {
         //var_dump($_POST);
         //var_dump($data);
+        $data = $this->sanitizeInput($data);
         $today = (new DateTime())->format('Y-m-d');
         $data["reservation_date"] = $today;
 
@@ -60,6 +61,7 @@ class StayController {
 
     public function update($id, $data) {
 
+        $data = $this->sanitizeInput($data);
         $today = (new DateTime())->format('Y-m-d');
         $data["reservation_date"] = $today;
 
@@ -119,5 +121,13 @@ class StayController {
     
         return "";
     }
+
+    private function sanitizeInput($data) {
+        $sanitizedData = [];
+        foreach ($data as $key => $value) {
+            $sanitizedData[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        }
+        return $sanitizedData;
+    }    
     
 }

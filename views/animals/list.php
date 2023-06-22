@@ -21,7 +21,7 @@ include('../views/layout/top.php'); ?>
             <?php $owner = $owners[$animal->id]; ?>
             <tr>
             <td><?= $animal->name; ?></td>
-            <td><?= $animal->sex; ?></td>
+            <td><?= $animal->sex === 'M' ? 'Male' : 'Femelle'; ?></td>
             <td><?= $animal->birth_date; ?></td>
             <td><?= $owner->first_name . ' ' . $owner->last_name; ?></td>
             <td><button class="xhr show" _id="<?= $animal->id; ?>">Afficher</button></td>

@@ -16,7 +16,6 @@
                 <option value="<?= $animal->id; ?>">
                     <?= $animal->id . ' - ' . $animal->name; ?>
                 </option>
-                <?php var_dump($animal->id); ?>
             <?php endforeach; ?>
         </select>
     </div>

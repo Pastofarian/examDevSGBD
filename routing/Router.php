@@ -40,7 +40,7 @@ class Router {
         //Si pas de controlleur on part sur une 404
         if (!$this->detect_controller()) {
             http_response_code(404);
-            var_dump('Not found');
+            //var_dump('Not found');
             die();
         }
         
@@ -103,16 +103,6 @@ class Router {
         }
         return $this->action = "index";
     }
-    
-    // private function run () {
-    //     $this->controller = new $this->controller();
-    //     if ($this->id && !$this->data) {
-    //         return $this->controller->{$this->action}($this->id);
-    //     } else if (!$this->id && $this->data) {
-    //         $this->controller->{$this->action}($this->data);
-    //     }
-    //     return $this->controller->{$this->action}($this->id, $this->data);
-    // }
 
     private function run () {
         $this->controller = new $this->controller();
@@ -126,11 +116,5 @@ class Router {
             $this->controller->{$this->action}();
         }
     }
-    
-    
-    private function debug () {
-        var_dump($this->controller, $this->id, $this->action);
-    }
-    
-    
+      
 }

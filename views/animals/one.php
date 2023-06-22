@@ -6,12 +6,13 @@
             <td><?= htmlspecialchars($animal->name); ?></td>
         </tr>
         <tr>
+        <tr>
             <td><label>Sexe:</label></td>
-            <td><?= htmlspecialchars($animal->sex); ?></td>
+            <td><?= $animal->sex === 'M' ? 'Male' : 'Femelle'; ?></td>
         </tr>
         <tr>
             <td><label>Stérilisé :</label></td>
-            <td><?= htmlspecialchars($animal->sterilized); ?></td>
+            <td><?= $animal->sterilized == 1 ? 'Stérilisé' : 'Non Stérilisé'; ?></td>
         </tr>
         <tr>
             <td><label>Date de naissance:</label></td>

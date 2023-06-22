@@ -37,6 +37,7 @@ class AnimalController {
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
+        $data = $this->sanitizeInput($data);
         $errorMessage = $this->validateAnimalData($data);
         if ($errorMessage) {
             return include '../views/animals/dateError.php';
@@ -80,6 +81,7 @@ class AnimalController {
 
     public function update ($id, $data) {
         //var_dump($_POST);
+        $data = $this->sanitizeInput($data);
         $errorMessage = $this->validateAnimalData($data);
         if ($errorMessage) {
             return include '../views/animals/dateError.php';
@@ -124,4 +126,13 @@ class AnimalController {
 
         return "";
     }
+
+    private function sanitizeInput($data) {
+        $sanitizedData = [];
+        foreach ($data as $key => $value) {
+            $sanitizedData[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+        }
+        return $sanitizedData;
+    }
+    
 }
