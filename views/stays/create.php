@@ -2,10 +2,6 @@
 
 <form action="/stays" method="post" class="store">
     <div>
-        <label for="reservation_date">Date de réservation:</label>
-        <input type="date" id="reservation_date" name="reservation_date" placeholder="Date de réservation">
-    </div>
-    <div>
         <label for="start_date">Date de début:</label>
         <input type="date" id="start_date" name="start_date" placeholder="Date de début">
     </div>
@@ -14,18 +10,17 @@
         <input type="date" id="end_date" name="end_date" placeholder="Date de fin">
     </div>
     <div>
-    <label for="animal_id">Animal:</label>
-    <select id="animal_id" name="animal_id">
-        <?php foreach ($animals as $animal) : ?>
-            <option value="<?= $animal->id; ?>">
-                <?= $animal->id . ' - ' . $animal->name; ?>
-            </option>
-        <?php endforeach; ?>
-    </select>
-</div>
-
+        <label for="animal_id">Animal:</label>
+        <select id="animal_id" name="animal_id">
+            <?php foreach ($animals as $animal) : ?>
+                <option value="<?= $animal->id; ?>">
+                    <?= $animal->id . ' - ' . $animal->name; ?>
+                </option>
+                <?php var_dump($animal->id); ?>
+            <?php endforeach; ?>
+        </select>
+    </div>
     <div>
         <input type="submit" value="Enregistrer">
     </div>
 </form>
-

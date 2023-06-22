@@ -53,15 +53,13 @@ $(document).ready(function () {
     }
 
     function update($form) {
-        let reservation_date = $form.find('input[name="reservation_date"]').val();
         let start_date = $form.find('input[name="start_date"]').val();
         let end_date = $form.find('input[name="end_date"]').val();
-        let animal_id = $form.find('input[name="animal_id"]').val();
+        let animal_id = $form.find('select[name="animal_id"]').val();
         let id = $form.find('input[name="id"]').val();
 
         $.post('/stays/' + id + '/update', {
             id: id,
-            reservation_date: reservation_date,
             start_date: start_date,
             end_date: end_date,
             animal_id: animal_id
@@ -73,13 +71,11 @@ $(document).ready(function () {
     }
 
     function store($form) {
-        let reservation_date = $form.find('input[name="reservation_date"]').val();
         let start_date = $form.find('input[name="start_date"]').val();
         let end_date = $form.find('input[name="end_date"]').val();
-        let animal_id = $form.find('input[name="animal_id"]').val();
+        let animal_id = $form.find('select[name="animal_id"]').val();
 
         $.post('/stays', {
-            reservation_date: reservation_date,
             start_date: start_date,
             end_date: end_date,
             animal_id: animal_id

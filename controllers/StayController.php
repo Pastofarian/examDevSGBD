@@ -36,6 +36,10 @@ class StayController {
 
     public function store($data) {
         //var_dump($_POST);
+        //var_dump($data);
+        $today = (new DateTime())->format('Y-m-d');
+        $data["reservation_date"] = $today;
+
         $validationResult = $this->validateStayData($data);
         if ($data && $data["animal_id"] && $data["reservation_date"] && $data["start_date"] && $data["end_date"] && $validationResult === "") {
     
@@ -55,6 +59,10 @@ class StayController {
     }
 
     public function update($id, $data) {
+
+        $today = (new DateTime())->format('Y-m-d');
+        $data["reservation_date"] = $today;
+
         $validationResult = $this->validateStayData($data);
         $stay = Stay::find($id);
         if ($stay && $validationResult === "") {
@@ -85,7 +93,7 @@ class StayController {
         $twoYearsFromNow = new DateTime('+2 years');
         
         if(!isset($data['reservation_date']) || !isset($data['start_date']) || !isset($data['end_date'])){
-            return 'Missing data. Please ensure reservation_date, start_date, and end_date are provided.';
+            return 'Données manquantes. Veuillez vous assurer que la date de début et la date de fin sont fournies.';
         }
     
         $reservationDate = DateTime::createFromFormat('Y-m-d', $data['reservation_date']);
@@ -100,13 +108,13 @@ class StayController {
             return 'La date de réservation doit être avant ou le même jour que la date de début.';
         }
     
-        if ($reservationDate < $today || $reservationDate > $twoYearsFromNow) {
-            return 'La date de réservation doit être entre aujourd\'hui et deux ans à partir de maintenant.';
+        if ($reservationDate == $today) {
+            return 'La date de réservation doit être aujourd\'hui';
         }
     
         $interval = $startDate->diff($endDate);
         if ($interval->days < 1 || $interval->days > 180) {
-            return 'La date de début doit être au moins un jour et pas plus de six mois avant la date de fin.';
+            return 'La date de fin doit être au moins un jour et pas plus de six mois après la date de début.';
         }
     
         return "";

@@ -28,6 +28,10 @@ class OwnerController {
 
     public function store ($data) {
         //var_dump($_POST);
+        $errorMessage = $this->validateOwnerData($data);
+        if ($errorMessage) {
+            return include '../views/owners/dateError.php';
+        }
         if ($data && $data["first_name"] && $data["last_name"]) {
     
             $birth_date = array_key_exists('birth_date', $data) && $data['birth_date'] ? $data['birth_date'] : '1970-01-01';
@@ -44,6 +48,10 @@ class OwnerController {
     }
     
     public function update ($id, $data) {
+        $errorMessage = $this->validateOwnerData($data);
+        if ($errorMessage) {
+            return include '../views/owners/dateError.php';
+        }
         //var_dump($_POST);
         $owner = Owner::find($id);
         if ($owner) {
@@ -66,5 +74,22 @@ class OwnerController {
             return include '../views/owners/delete.php';
         }
         return include '../views/owners/notfound.php';
+    }
+
+    private function validateOwnerData($data) {
+        $today = new DateTime();
+        $thirtyYearsAgo = new DateTime('-100 years');
+        
+        if(!isset($data['birth_date'])){
+            return 'Données manquantes. Veuillez vous assurer que la date de naissance est fournie.';
+        }
+    
+        $birthDate = DateTime::createFromFormat('Y-m-d', $data['birth_date']);
+
+        if ($birthDate > $today || $birthDate < $thirtyYearsAgo) {
+            return 'La date de naissance doit être comprise entre aujourd\'hui et 100 ans.';
+        }
+
+        return "";
     }
 }
