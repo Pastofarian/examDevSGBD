@@ -4,6 +4,13 @@ class AnimalController {
     public function index () {
         $animals = Animal::all();
         $owners = []; 
+        $stays = Stay::all();
+
+        $animalsWithStays = [];
+    foreach($stays as $stay) {
+        $animalsWithStays[] = $stay->animal_id;
+    }
+
         foreach($animals as $animal) {
             $owners[$animal->id] = Owner::find($animal->owner_id);  // stock chaque objet Owner dans le tableau, en utilisant l'ID de l'animal comme clé
         }

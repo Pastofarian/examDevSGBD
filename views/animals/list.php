@@ -26,7 +26,11 @@ include('../views/layout/top.php'); ?>
             <td><?= $owner->first_name . ' ' . $owner->last_name; ?></td>
             <td><button class="xhr show" _id="<?= $animal->id; ?>">Afficher</button></td>
             <td><button class="xhr edit" _id="<?= $animal->id; ?>">Modifier</button></td>
+            <?php if(in_array($animal->id, $animalsWithStays)): ?>
+            <td><button class="xhr delete" _id="<?= $animal->id; ?>" disabled>Effacer</button></td>
+        <?php else: ?>
             <td><button class="xhr delete" _id="<?= $animal->id; ?>">Effacer</button></td>
+        <?php endif; ?>
         </tr>
         <?php endforeach; ?>
     </tbody>

@@ -18,11 +18,19 @@ include('../views/layout/top.php'); ?>
         </tr>
     </thead>
     <tbody>
-        <?php foreach($stays as $stay): ?>
-            <?php $animal = $animals[$stay->animal_id]; ?>
+                <?php foreach($stays as $stay): ?>
+                    <?php 
+                if (!array_key_exists($stay->animal_id, $animalsById)) {
+                    continue; 
+                }
+
+                $animal = $animalsById[$stay->animal_id]; 
+                //var_dump($animal);
+            ?>
             <tr>
             <td><?= $animalsById[$stay->animal_id]->chip_id; ?></td>
             <td><?= $animalsById[$stay->animal_id]->name; ?></td>
+            <?php// var_dump($animalsById); ?>
             <td><?= $stay->reservation_date; ?></td>
             <td><?= $stay->start_date; ?></td>
             <td><?= $stay->end_date; ?></td>

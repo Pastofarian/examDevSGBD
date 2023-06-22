@@ -34,7 +34,11 @@ include('../views/layout/top.php'); ?>
             </td>
             <td><button class="xhr show" _id="<?= $owner->id; ?>">Afficher</button></td>
             <td><button class="xhr edit" _id="<?= $owner->id; ?>">Modifier</button></td>
-            <td><button class="xhr delete" _id="<?= $owner->id; ?>">Effacer</button></td>
+            <?php if(!empty($ownerAnimals)): ?>
+    <td><button class="xhr delete" _id="<?= $owner->id; ?>" disabled>Effacer</button></td>
+<?php else: ?>
+    <td><button class="xhr delete" _id="<?= $owner->id; ?>">Effacer</button></td>
+<?php endif; ?>
         </tr>
         <?php endforeach; ?>
     </tbody>
