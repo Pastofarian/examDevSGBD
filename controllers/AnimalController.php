@@ -6,6 +6,7 @@ class AnimalController
     {
         $animals = Animal::all();
         $owners = [];
+        $parents = [];
         $stays = Stay::all();
 
         $animalsWithStays = [];
@@ -15,6 +16,11 @@ class AnimalController
 
         foreach ($animals as $animal) {
             $owners[$animal->id] = Owner::find($animal->owner_id); // stock chaque objet Owner dans le tableau, en utilisant l'ID de l'animal comme clé
+            if ($animal->parent_id !== NULL) {
+                $parents[$animal->id] = Animal::find($animal->parent_id); // retrieves parent for each animal
+            } else {
+                $parents[$animal->id] = NULL; // no parent for this animal
+            }
         }
         include '../views/animals/list.php';
     }
@@ -24,6 +30,7 @@ class AnimalController
         $animal = Animal::find($id);
         if ($animal) {
             $owner = Owner::find($animal->owner_id);
+            $parent = Animal::find($animal->parent_id); 
             return include '../views/animals/one.php';
         }
         return include '../views/animals/notfound.php';
@@ -140,3 +147,4 @@ class AnimalController
         return $sanitizedData;
     }
 }
+

@@ -8,6 +8,7 @@
             <th>Sexe</th>
             <th>Date de naissance</th>
             <th>Propriétaire</th>
+            <th>Parent</th> <!-- Add a header for Parent -->
             <th>Afficher</th>
             <th>Modifier</th>
             <th>Effacer</th>
@@ -15,12 +16,24 @@
       </thead>
       <tbody>
          <?php foreach($animals as $animal): ?>
-         <?php $owner = $owners[$animal->id]; ?>
+         <?php 
+            $owner = $owners[$animal->id]; 
+            $parent = $parents[$animal->id];  // Retrieve the parent for the current animal
+         ?>
          <tr>
             <td><?= $animal->name; ?></td>
             <td><?= $animal->sex === 'M' ? 'Male' : 'Femelle'; ?></td>
             <td><?= $animal->birth_date; ?></td>
             <td><?= $owner->first_name . ' ' . $owner->last_name; ?></td>
+            <td>
+                <?php 
+                    if($parent !== NULL) {
+                        echo $parent->name;  
+                    } else {
+                        echo "Pas de parent";
+                    }
+                ?>
+            </td>
             <td><button class="btn btn-primary xhr show" _id="<?= $animal->id; ?>">Afficher</button></td>
             <td><button class="btn btn-warning xhr edit" _id="<?= $animal->id; ?>">Modifier</button></td>
             <?php if(in_array($animal->id, $animalsWithStays)): ?>

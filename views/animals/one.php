@@ -23,6 +23,16 @@
             <td><label>Numéro de puce:</label></td>
             <td><?= htmlspecialchars($animal->chip_id); ?></td>
          </tr>
+         <tr>
+            <td><label>Parent:</label></td>
+            <td>
+               <?php if ($parent): ?>
+               <?= htmlspecialchars($parent->name); ?> 
+               <?php else: ?>
+               Pas de parent
+               <?php endif; ?>
+            </td>
+         </tr>
       </table>
    </div>
    <div class="mb-4">
