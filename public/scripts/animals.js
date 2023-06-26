@@ -110,4 +110,51 @@ $(document).ready(function () {
                 console.warn("error in store", err);
             });
     }
+    $("body").on("click", "button.create-parent", function () {
+        let id = $(this).attr("_id");
+        return createParent(id);
+    });
+
+    function createParent(id) {
+        $.get("/animals/" + id + "/createParent")
+            .done(function (result) {
+                $(".content").html(result);
+            })
+            .fail(function (err) {
+                console.warn("error in createParent", err);
+            });
+    }
+
+    $("body").on("submit", "form.create-parent", function (e) {
+        e.preventDefault();
+        return storeParent($(this));
+    });
+
+    function storeParent($form) {
+        let name = $form.find('input[name="name"]').val();
+        let sex = $form.find('select[name="sex"]').val();
+        let sterilized = $form.find('select[name="sterilized"]').val();
+        let birth_date = $form.find('input[name="birth_date"]').val();
+        let chip_id = $form.find('input[name="chip_id"]').val();
+        let owner_id = $form.find('select[name="owner_id"]').val();
+        let parent_id = $form.find('select[name="parent_id"]').val();
+        let id = $form.find('input[name="id"]').val();
+
+        $.post("/animals/" + id + "/storeParent", {
+            id: id,
+            name: name,
+            sex: sex,
+            sterilized: sterilized,
+            birth_date: birth_date,
+            chip_id: chip_id,
+            owner_id: owner_id,
+            parent_id: parent_id
+        })
+            .done(function (result) {
+                $(".content").html(result);
+            })
+            .fail(function (err) {
+                console.warn("error in storeParent", err);
+            });
+    }
 });

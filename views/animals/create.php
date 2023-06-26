@@ -1,7 +1,8 @@
 <div class="container mt-4">
-   <h2 class="mb-4">Créer un nouvel animal</h2>
-   <form action="/animals" method="post" class="store">
+   <h2 class="mb-4">Créer un animal</h2>
+   <form action="/animals/storeParent" method="post" class="store-parent">
       <div class="form-group">
+         <input type="hidden" id="id" name="id" value="<?= $animal->id; ?>">
          <label for="name">Nom:</label>
          <input type="text" id="name" name="name" class="form-control" placeholder="Nom">
       </div>
@@ -32,6 +33,15 @@
          <select id="owner_id" name="owner_id" class="form-control">
             <?php foreach ($owners as $owner) : ?>
             <option value="<?= $owner->id; ?>"><?= $owner->first_name . ' ' . $owner->last_name; ?></option>
+            <?php endforeach; ?>
+         </select>
+      </div>
+      <div class="form-group">
+         <label for="parent_id">Parent:</label>
+         <select id="parent_id" name="parent_id" class="form-control">
+            <option value="">Pas de parent</option>
+            <?php foreach ($possible_parents as $possible_parent) : ?>
+            <option value="<?= $possible_parent->id; ?>"><?= $possible_parent->name; ?></option>
             <?php endforeach; ?>
          </select>
       </div>

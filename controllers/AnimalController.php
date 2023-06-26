@@ -15,11 +15,11 @@ class AnimalController
         }
 
         foreach ($animals as $animal) {
-            $owners[$animal->id] = Owner::find($animal->owner_id); // stock chaque objet Owner dans le tableau, en utilisant l'ID de l'animal comme clé
+            $owners[$animal->id] = Owner::find($animal->owner_id); 
             if ($animal->parent_id !== NULL) {
-                $parents[$animal->id] = Animal::find($animal->parent_id); // retrieves parent for each animal
+                $parents[$animal->id] = Animal::find($animal->parent_id); /
             } else {
-                $parents[$animal->id] = NULL; // no parent for this animal
+                $parents[$animal->id] = NULL; 
             }
         }
         include '../views/animals/list.php';
@@ -32,6 +32,7 @@ class AnimalController
             $owner = Owner::find($animal->owner_id);
             $parent = Animal::find($animal->parent_id); 
             return include '../views/animals/one.php';
+            $children = Animal::where('parent_id', $id)->get();
         }
         return include '../views/animals/notfound.php';
     }
@@ -39,6 +40,7 @@ class AnimalController
     public function create()
     {
         $owners = Owner::all();
+        $possible_parents = Animal::all();
         return include '../views/animals/create.php';
     }
 
@@ -146,5 +148,32 @@ class AnimalController
         }
         return $sanitizedData;
     }
+
+    public function createParent($animal_id)
+    {
+        $animal = Animal::find($animal_id);
+        $owners = Owner::all();
+        if ($animal) {
+            return include '../views/animals/create.php';
+        }
+        return include '../views/animals/notfound.php';
+    }
+
+        public function storeParent($animal_id, $data)
+    {
+        $data = $this->sanitizeInput($data);
+        $errorMessage = $this->validateAnimalData($data);
+        if ($errorMessage) {
+            return include '../views/animals/dateError.php';
+        }
+        if ($data && $data["name"]) {
+            $parent = new Animal(false, $data["name"], $data["sex"], $data["sterilized"], $data["birth_date"], $data["chip_id"], $data["owner_id"]);
+            $parent->parent_id = $data["parent_id"];  // Add parent_id
+            $parent->save();
+            return include '../views/animals/store.php';
+        }
+    }
+
+
 }
 
