@@ -37,6 +37,16 @@
       <p>Pas de propriétaire</p>
       <?php endif; ?>
    </div>
+   <tr>
+            <td><label>Parent:</label></td>
+            <td>
+               <?php if ($parent): ?>
+               <?= htmlspecialchars($parent->name); ?> 
+               <?php else: ?>
+               Pas de parent
+               <?php endif; ?>
+            </td>
+         </tr>
    <?php if ($children): ?>
     <div class="mb-4">
         <h2>Enfants</h2>
