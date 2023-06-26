@@ -17,7 +17,7 @@ class AnimalController
         foreach ($animals as $animal) {
             $owners[$animal->id] = Owner::find($animal->owner_id); 
             if ($animal->parent_id !== NULL) {
-                $parents[$animal->id] = Animal::find($animal->parent_id); /
+                $parents[$animal->id] = Animal::find($animal->parent_id); 
             } else {
                 $parents[$animal->id] = NULL; 
             }
@@ -31,8 +31,9 @@ class AnimalController
         if ($animal) {
             $owner = Owner::find($animal->owner_id);
             $parent = Animal::find($animal->parent_id); 
+            $children = Animal::where('parent_id', $id);
             return include '../views/animals/one.php';
-            $children = Animal::where('parent_id', $id)->get();
+            
         }
         return include '../views/animals/notfound.php';
     }

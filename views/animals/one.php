@@ -37,6 +37,16 @@
       <p>Pas de propriétaire</p>
       <?php endif; ?>
    </div>
+   <?php if ($children): ?>
+    <div class="mb-4">
+        <h2>Enfants</h2>
+        <ul>
+            <?php foreach ($children as $child): ?>
+                <li><?= htmlspecialchars($child->name); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
    <div class="back-link">
       <a href="/animals" class="btn btn-primary">Retour à la liste</a>
    </div>

@@ -8,7 +8,7 @@
             <th>Sexe</th>
             <th>Date de naissance</th>
             <th>Propriétaire</th>
-            <th>Parent</th> 
+            <th>Parents</th> 
             <th>Enfants</th>
             <th>Afficher</th>
             <th>Modifier</th>
